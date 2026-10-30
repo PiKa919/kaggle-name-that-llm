@@ -1,0 +1,15 @@
+# Understand-Anything exclusions
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.ua/
+.superpowers/
+scratch/__pycache__/
+*.log
+submission.parquet
+experiments/cache_*.npz
+experiments/cache_*.npy
+experiments/archive/
+data/train.csv
+*.ipynb_checkpoints/

@@ -1,0 +1,17 @@
+{
+  "id": "pikaaa/name-that-llm-baseline-blend",
+  "title": "Name That LLM - Baseline Blend",
+  "code_file": "submission_baseline.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": "true",
+  "enable_gpu": "false",
+  "enable_tpu": "false",
+  "enable_internet": "false",
+  "dataset_sources": [],
+  "competition_sources": [
+    "name-that-llm"
+  ],
+  "kernel_sources": [],
+  "model_sources": []
+}

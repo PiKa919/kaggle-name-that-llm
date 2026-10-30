@@ -1,0 +1,27 @@
+You are DeepSeek Subagent 2: Representation Calibration & Optimal Transport Specialist for the Kaggle "Name That LLM" competition.
+
+YOUR MISSION:
+Author a standalone, high-performance module `src/test_time_calibration.py` that implements test-time probability calibration, temperature scaling, and soft entropy-regularized optimal transport (Sinkhorn-Knopp algorithm).
+
+CONTEXT & PROBLEM:
+The evaluation metric is Balanced Accuracy (unweighted average of per-class recall across 18 models):
+    Balanced Accuracy = 1/18 * sum_{k=1}^{18} Recall_k
+In test sets with label shift, uncalibrated argmax predictions collapse minority classes, severely hurting Balanced Accuracy.
+Hard Hungarian matching fails because the test set is subsampled and does not have exactly equal 18-model rounds per prompt.
+The winning alternative is Soft Entropy-Regularized Optimal Transport (Sinkhorn-Knopp) and Adaptive Prior Centering.
+
+REQUIREMENTS:
+1. Pure numpy/scipy implementation (zero PyTorch/heavy dependencies).
+2. Function `temperature_scale_logits(logits: np.ndarray, temperatures: np.ndarray) -> np.ndarray`:
+   Applies per-class or global temperature scaling.
+3. Function `sinkhorn_knopp_transport(P: np.ndarray, target_col_marginal: np.ndarray = None, reg: float = 0.05, max_iter: int = 100, tol: float = 1e-4) -> np.ndarray`:
+   Efficiently solves the entropy-regularized optimal transport problem:
+       min_{T} <T, -log(P)> + reg * KL(T || uniform)
+       s.t. T @ 1 = 1/N (row marginals), T.T @ 1 = 1/18 (column marginals).
+   Includes a smoothing parameter `alpha` in [0, 1] allowing blending between raw probabilities and balanced optimal transport:
+       P_calibrated = (1 - alpha) * P + alpha * (18 * T)
+4. Function `adaptive_neighborhood_centering(P: np.ndarray, embeddings: np.ndarray = None, k_neighbors: int = 18, strength: float = 0.20) -> np.ndarray`:
+   Softly centers logits against local prompt neighborhood means to eliminate prompt-topic distractors without hard mutual exclusion.
+5. Provide a test suite function `test_calibration_invariants()` verifying that output sums to 1.0, is finite, non-negative, and improves recall balance.
+
+Write complete, production-grade Python code that can be saved directly to `src/test_time_calibration.py`. Output ONLY the Python code in a ```python code block.

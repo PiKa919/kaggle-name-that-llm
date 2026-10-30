@@ -1,0 +1,86 @@
+[
+ {
+  "fold": 0,
+  "tag": "A plain | official",
+  "rows": 1350,
+  "ba": 0.36083083083083084
+ },
+ {
+  "fold": 0,
+  "tag": "B plain | official+pool",
+  "rows": 41340,
+  "ba": 0.4534434434434434
+ },
+ {
+  "fold": 0,
+  "tag": "C centred | official (current twin)",
+  "rows": 1350,
+  "ba": 0.3986586586586586
+ },
+ {
+  "fold": 0,
+  "tag": "D centred | official+centred pool",
+  "rows": 41340,
+  "ba": 0.506036036036036
+ },
+ {
+  "fold": 0,
+  "tag": "E blend w=0.25",
+  "rows": 1349,
+  "ba": 0.47789789789789794
+ },
+ {
+  "fold": 0,
+  "tag": "E blend w=0.5",
+  "rows": 1349,
+  "ba": 0.4934634634634636
+ },
+ {
+  "fold": 0,
+  "tag": "E blend w=1.0",
+  "rows": 1349,
+  "ba": 0.506036036036036
+ },
+ {
+  "fold": 1,
+  "tag": "A plain | official",
+  "rows": 1349,
+  "ba": 0.35407407407407404
+ },
+ {
+  "fold": 1,
+  "tag": "B plain | official+pool",
+  "rows": 41339,
+  "ba": 0.4266666666666667
+ },
+ {
+  "fold": 1,
+  "tag": "C centred | official (current twin)",
+  "rows": 1349,
+  "ba": 0.4237037037037037
+ },
+ {
+  "fold": 1,
+  "tag": "D centred | official+centred pool",
+  "rows": 41339,
+  "ba": 0.4940740740740741
+ },
+ {
+  "fold": 1,
+  "tag": "E blend w=0.25",
+  "rows": 1350,
+  "ba": 0.44962962962962966
+ },
+ {
+  "fold": 1,
+  "tag": "E blend w=0.5",
+  "rows": 1350,
+  "ba": 0.4748148148148148
+ },
+ {
+  "fold": 1,
+  "tag": "E blend w=1.0",
+  "rows": 1350,
+  "ba": 0.4940740740740741
+ }
+]

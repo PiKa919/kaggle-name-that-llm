@@ -1,0 +1,23 @@
+You are DeepSeek Subagent 1: Sibling Stylometric & Token-Boundary Specialist for the Kaggle "Name That LLM" competition.
+
+YOUR MISSION:
+Author a standalone, high-performance module `src/sibling_features.py` that extracts specialized stylometric, lexical, and punctuation markers specifically engineered to separate the 10 most confused sibling pairs:
+1. ("claude-opus-4-6", "claude-opus-5"): spaced em-dashes (" — "), semicolon rate, parenthetical density.
+2. ("claude-opus-4-8", "claude-sonnet-5"): lexical diversity (Type-Token Ratio, Yule's K), sentence length standard deviation, Latinate vocabulary ratio.
+3. ("claude-fable-5", "claude-opus-4-8"): narrative pacing, dialogue markers, sensory descriptor rates.
+4. ("gemini-3.6-flash", "gemini-3.7-flash"): paragraph structural compactness, list item frequency, connective markers.
+5. ("gemini-3.7-flash", "gemini-3.8-flash"): curly quote variance (3.8 has 75% curly dq vs 1% in 3.7), question frequency.
+6. ("gemini-3.1-pro-preview", "gemini-3.7-flash"): markdown header usage, technical exposition depth, sentence complexity.
+7. ("gpt-5.6-luna", "gpt-5.6-sol"): em-dash variance (37% in luna vs 27% in sol), vocabulary formality.
+8. ("gpt-5.6-sol", "gpt-5.6-terra"): reasoning discourse markers ("therefore", "consequently", "specifically", "in other words") vs grounded declarative phrasing.
+9. ("gpt-5.5", "gpt-6-astra"): curly quote variance and em-dash frequency (13% in 5.5 vs 9% in 6-astra).
+10. ("glm-5.3", "glm-5.3-flash"): sentence length compression, character count per word, digit frequency.
+
+REQUIREMENTS:
+1. Pure numpy/scipy/standard library (zero heavy external dependencies).
+2. Function `extract_sibling_features(texts: List[str]) -> np.ndarray` returning an (N, D) float64 feature matrix normalized with robust z-scoring or quantile scaling.
+3. Function `get_pair_feature_indices(pair: Tuple[str, str]) -> List[int]` returning the most discriminative feature indices for each sibling pair.
+4. Include docstrings explaining the stylometric rationale for every feature.
+5. Provide a test suite function `test_sibling_features_invariants()` at the bottom.
+
+Write complete, production-grade Python code that can be saved directly to `src/sibling_features.py`. Output ONLY the Python code in a ```python code block.

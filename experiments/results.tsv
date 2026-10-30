@@ -1,0 +1,7 @@
+experiment_id	name	balanced_accuracy	lab_accuracy	sibling_error_pct	description
+exp00_starter	Starter Pipeline (lowercase=True, 25k/35k ngrams)	0.3082	0.6543	50.0	Official starter code converted to StratifiedGroupKFold
+exp01_opt_tfidf	Optimized TF-IDF (lowercase=False, 200k/300k ngrams)	0.3501	0.7047	54.6	Case-preserved, punctuation token pattern, balanced class weight
+exp02_lgb_blend	Stylometric LightGBM (57 features) + TF-IDF Blend	0.3689	0.7173	55.2	LightGBM (0.2430) + TF-IDF (0.3501) optimal alpha=0.90 blend
+sub01_lb	Official Kaggle Submission (Ref: 57434986)	0.3550	--	--	Public Leaderboard score of committed baseline blend
+exp06_raw_qwen	Raw Ambient Qwen3-4B Embeddings (No Centering)	0.1874	0.3809	61.2	Raw base embeddings dominated 30.6x by prompt topic confound
+exp07_anova_lda	ANOVA-Centered 17-Dim Quotient Space Canonical LDA	0.3937	0.7210	54.0	DeepSeek crossed 2-way ANOVA centering annihilating topic confound to 0.0000

@@ -1,0 +1,25 @@
+{
+ "language": "python",
+ "kernel_type": "script",
+ "is_private": "true",
+ "enable_internet": "false",
+ "dataset_sources": [
+  "seyitkaangunes/ntl-extra-api-passages",
+  "abdullah1afify/ntl-generations",
+  "dophuchung/ntl-proxy-generations",
+  "zbigniewkirchner/ntl-qwen3-8b-lora-claude-head",
+  "lucasboesen/ntl-free-proxy-generations",
+  "nishantdahal/ntl-two-stage-lora",
+  "prvsiyan/prvsiyans-extended-name-that-llm-dataset",
+  "bbucxi/qwen35-9b-safetensors",
+  "pjmathematician/ultrabert-380m-ntl",
+  "josephadamski91/ntl-atlas-qwen3-8b-v1",
+  "swaroopmeher/ntl-public-heads",
+  "dddmdd/ntl-finetuned-encoders"
+ ],
+ "id": "pikaaa/ntl-input-probe",
+ "title": "NTL input probe",
+ "code_file": "script.py",
+ "enable_gpu": false,
+ "enable_tpu": false
+}

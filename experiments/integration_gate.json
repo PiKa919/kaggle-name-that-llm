@@ -1,0 +1,403 @@
+{
+  "bacc_ngram": 0.3685732040765598,
+  "sibling_shape": [
+    2699,
+    93
+  ],
+  "sibling_extract_seconds_2699": 4.06,
+  "dense_18way": {
+    "dense_only": 0.30524981357196124,
+    "sparse+dense0.1": 0.37895351727566495,
+    "sparse+dense0.5": 0.3433855331841909
+  },
+  "pairwise": [
+    {
+      "pair": "claude-opus-4-6|claude-opus-5",
+      "n": 300,
+      "routed": true,
+      "acc_tfidf": 0.8766666666666667,
+      "acc_dense": 0.7733333333333333,
+      "acc_both": 0.83
+    },
+    {
+      "pair": "claude-opus-4-8|claude-sonnet-5",
+      "n": 300,
+      "routed": true,
+      "acc_tfidf": 0.66,
+      "acc_dense": 0.65,
+      "acc_both": 0.68
+    },
+    {
+      "pair": "gemini-3.6-flash|gemini-3.7-flash",
+      "n": 300,
+      "routed": true,
+      "acc_tfidf": 0.6466666666666666,
+      "acc_dense": 0.6,
+      "acc_both": 0.66
+    },
+    {
+      "pair": "gemini-3.7-flash|gemini-3.8-flash",
+      "n": 300,
+      "routed": true,
+      "acc_tfidf": 0.6033333333333334,
+      "acc_dense": 0.5533333333333333,
+      "acc_both": 0.5633333333333334
+    },
+    {
+      "pair": "gpt-5.6-luna|gpt-5.6-sol",
+      "n": 300,
+      "routed": true,
+      "acc_tfidf": 0.59,
+      "acc_dense": 0.59,
+      "acc_both": 0.6266666666666667
+    },
+    {
+      "pair": "gpt-5.6-sol|gpt-5.6-terra",
+      "n": 300,
+      "routed": true,
+      "acc_tfidf": 0.57,
+      "acc_dense": 0.53,
+      "acc_both": 0.5633333333333334
+    },
+    {
+      "pair": "glm-5.3|glm-5.3-flash",
+      "n": 300,
+      "routed": true,
+      "acc_tfidf": 0.5,
+      "acc_dense": 0.49333333333333335,
+      "acc_both": 0.51
+    },
+    {
+      "pair": "glm-5.3|claude-opus-4-6",
+      "n": 300,
+      "routed": false,
+      "acc_tfidf": 0.7733333333333333,
+      "acc_dense": 0.76,
+      "acc_both": 0.7866666666666666
+    }
+  ],
+  "pair_mean_acc_tfidf": 0.6525000000000001,
+  "pair_mean_acc_dense": 0.61875,
+  "pair_mean_acc_both": 0.6525,
+  "injection_sweep": {
+    "tfidf_only|0.00": 0.3685732040765598,
+    "tfidf_only|0.05": 0.3696843151876709,
+    "tfidf_only|0.10": 0.37005468555804133,
+    "tfidf_only|0.20": 0.37227690778026346,
+    "tfidf+dense|0.00": 0.3685732040765598,
+    "tfidf+dense|0.05": 0.37079542629878204,
+    "tfidf+dense|0.10": 0.3711657966691524,
+    "tfidf+dense|0.20": 0.37338801889137463
+  },
+  "best_injection_weight": 0.2,
+  "bacc_base_chosen": 0.37895351727566495,
+  "sinkhorn_grid": [
+    {
+      "reg": 0.1,
+      "alpha": 0.5,
+      "bacc": 0.4956500124285359
+    },
+    {
+      "reg": 0.1,
+      "alpha": 0.3,
+      "bacc": 0.4956475267213522
+    },
+    {
+      "reg": 0.1,
+      "alpha": 0.4,
+      "bacc": 0.4956475267213522
+    },
+    {
+      "reg": 0.1,
+      "alpha": 0.7,
+      "bacc": 0.4945413870246086
+    },
+    {
+      "reg": 0.1,
+      "alpha": 1.0,
+      "bacc": 0.49342530449913
+    },
+    {
+      "reg": 0.2,
+      "alpha": 1.0,
+      "bacc": 0.4934228187919463
+    },
+    {
+      "reg": 0.2,
+      "alpha": 0.7,
+      "bacc": 0.49231170768083526
+    },
+    {
+      "reg": 0.2,
+      "alpha": 0.4,
+      "bacc": 0.4908302261993536
+    },
+    {
+      "reg": 0.2,
+      "alpha": 0.5,
+      "bacc": 0.4904598558289833
+    },
+    {
+      "reg": 0.05,
+      "alpha": 1.0,
+      "bacc": 0.4897141436738753
+    },
+    {
+      "reg": 0.05,
+      "alpha": 0.7,
+      "bacc": 0.48860551826994786
+    },
+    {
+      "reg": 0.05,
+      "alpha": 0.5,
+      "bacc": 0.48823514789957734
+    },
+    {
+      "reg": 0.05,
+      "alpha": 0.3,
+      "bacc": 0.4878647775292071
+    },
+    {
+      "reg": 0.05,
+      "alpha": 0.4,
+      "bacc": 0.4874944071588367
+    },
+    {
+      "reg": 0.02,
+      "alpha": 0.5,
+      "bacc": 0.48712652249564997
+    },
+    {
+      "reg": 0.05,
+      "alpha": 0.2,
+      "bacc": 0.4867586378324634
+    },
+    {
+      "reg": 0.02,
+      "alpha": 0.7,
+      "bacc": 0.4867561521252796
+    },
+    {
+      "reg": 0.02,
+      "alpha": 0.3,
+      "bacc": 0.4863832960477256
+    },
+    {
+      "reg": 0.1,
+      "alpha": 0.2,
+      "bacc": 0.4863808103405419
+    },
+    {
+      "reg": 0.02,
+      "alpha": 0.4,
+      "bacc": 0.48601541138453885
+    },
+    {
+      "reg": 0.02,
+      "alpha": 1.0,
+      "bacc": 0.4849067859806115
+    },
+    {
+      "reg": 0.02,
+      "alpha": 0.2,
+      "bacc": 0.4848993288590604
+    },
+    {
+      "reg": 0.5,
+      "alpha": 1.0,
+      "bacc": 0.48193885160328115
+    },
+    {
+      "reg": 0.2,
+      "alpha": 0.3,
+      "bacc": 0.48156599552572704
+    },
+    {
+      "reg": 0.5,
+      "alpha": 0.7,
+      "bacc": 0.4760104399701716
+    },
+    {
+      "reg": 0.2,
+      "alpha": 0.2,
+      "bacc": 0.47564006959980115
+    },
+    {
+      "reg": 0.5,
+      "alpha": 0.5,
+      "bacc": 0.4704499130002486
+    },
+    {
+      "reg": 0.02,
+      "alpha": 0.1,
+      "bacc": 0.46860054685558045
+    },
+    {
+      "reg": 0.05,
+      "alpha": 0.1,
+      "bacc": 0.46674869500372856
+    },
+    {
+      "reg": 0.1,
+      "alpha": 0.1,
+      "bacc": 0.4619363658960974
+    },
+    {
+      "reg": 0.5,
+      "alpha": 0.4,
+      "bacc": 0.4593388018891374
+    },
+    {
+      "reg": 0.5,
+      "alpha": 0.3,
+      "bacc": 0.44970668655232415
+    },
+    {
+      "reg": 0.2,
+      "alpha": 0.1,
+      "bacc": 0.44970420084514046
+    },
+    {
+      "reg": 0.5,
+      "alpha": 0.2,
+      "bacc": 0.4371116082525479
+    },
+    {
+      "reg": 0.5,
+      "alpha": 0.1,
+      "bacc": 0.41081282624906784
+    }
+  ],
+  "sinkhorn_best": {
+    "reg": 0.1,
+    "alpha": 0.5,
+    "bacc": 0.4956500124285359
+  },
+  "placement": {
+    "ot_then_potential": 0.49231667909520266,
+    "potential_then_ot": 0.4956500124285359
+  },
+  "centering_grid": [
+    {
+      "strength": 0.0,
+      "k": 8,
+      "mode": "posterior-knn",
+      "bacc": 0.4956500124285359
+    },
+    {
+      "strength": 0.0,
+      "k": 12,
+      "mode": "posterior-knn",
+      "bacc": 0.4956500124285359
+    },
+    {
+      "strength": 0.0,
+      "k": 24,
+      "mode": "posterior-knn",
+      "bacc": 0.4956500124285359
+    },
+    {
+      "strength": 0.0,
+      "k": 18,
+      "mode": "oracle-prompt",
+      "bacc": 0.4956500124285359
+    },
+    {
+      "strength": 0.1,
+      "k": 8,
+      "mode": "posterior-knn",
+      "bacc": 0.4952771563509819
+    },
+    {
+      "strength": 0.5,
+      "k": 18,
+      "mode": "oracle-prompt",
+      "bacc": 0.49490927168779525
+    },
+    {
+      "strength": 0.3,
+      "k": 18,
+      "mode": "oracle-prompt",
+      "bacc": 0.4945389013174249
+    },
+    {
+      "strength": 0.1,
+      "k": 18,
+      "mode": "oracle-prompt",
+      "bacc": 0.49453890131742484
+    },
+    {
+      "strength": 0.1,
+      "k": 12,
+      "mode": "posterior-knn",
+      "bacc": 0.49453641561024114
+    },
+    {
+      "strength": 0.2,
+      "k": 18,
+      "mode": "oracle-prompt",
+      "bacc": 0.4941685309470545
+    },
+    {
+      "strength": 0.2,
+      "k": 12,
+      "mode": "posterior-knn",
+      "bacc": 0.49231419338801896
+    },
+    {
+      "strength": 0.1,
+      "k": 24,
+      "mode": "posterior-knn",
+      "bacc": 0.4915734526472782
+    },
+    {
+      "strength": 0.2,
+      "k": 24,
+      "mode": "posterior-knn",
+      "bacc": 0.4915734526472781
+    },
+    {
+      "strength": 0.2,
+      "k": 8,
+      "mode": "posterior-knn",
+      "bacc": 0.4889783743475018
+    },
+    {
+      "strength": 0.3,
+      "k": 12,
+      "mode": "posterior-knn",
+      "bacc": 0.4867536664180959
+    },
+    {
+      "strength": 0.3,
+      "k": 24,
+      "mode": "posterior-knn",
+      "bacc": 0.4852746706437982
+    },
+    {
+      "strength": 0.3,
+      "k": 8,
+      "mode": "posterior-knn",
+      "bacc": 0.4849067859806115
+    },
+    {
+      "strength": 0.5,
+      "k": 12,
+      "mode": "posterior-knn",
+      "bacc": 0.46859557544121305
+    },
+    {
+      "strength": 0.5,
+      "k": 24,
+      "mode": "posterior-knn",
+      "bacc": 0.4674919214516529
+    },
+    {
+      "strength": 0.5,
+      "k": 8,
+      "mode": "posterior-knn",
+      "bacc": 0.4671165796669152
+    }
+  ],
+  "runtime_seconds": 538.2
+}

@@ -1,0 +1,44 @@
+{
+ "id": "pikaaa/name-that-llm-v11",
+ "title": "Name That LLM v11",
+ "code_file": "script.py",
+ "language": "python",
+ "kernel_type": "script",
+ "is_private": "true",
+ "enable_gpu": "true",
+ "enable_tpu": "false",
+ "enable_internet": "false",
+ "dataset_sources": [
+  "seyitkaangunes/ntl-extra-api-passages",
+  "abdullah1afify/ntl-generations",
+  "dophuchung/ntl-proxy-generations",
+  "zbigniewkirchner/ntl-qwen3-8b-lora-claude-head",
+  "lucasboesen/ntl-free-proxy-generations",
+  "nishantdahal/ntl-two-stage-lora",
+  "prvsiyan/prvsiyans-extended-name-that-llm-dataset",
+  "bbucxi/qwen35-9b-safetensors",
+  "pjmathematician/ultrabert-380m-ntl",
+  "josephadamski91/ntl-atlas-qwen3-8b-v1",
+  "swaroopmeher/ntl-public-heads",
+  "dddmdd/ntl-finetuned-encoders"
+ ],
+ "kernel_sources": [
+  "lucasboesen/name-that-llm-glm4-9b-trunc25",
+  "lucasboesen/name-that-llm-extract-encoders2",
+  "lucasboesen/name-that-llm-electra-large-weights",
+  "lucasboesen/name-that-llm-desklib-weights",
+  "lucasboesen/name-that-llm-train-lora24-s7",
+  "lucasboesen/name-that-llm-train-tokattn",
+  "lucasboesen/name-that-llm-train-tokattn2",
+  "vnton37nguyn/ntl-train-lora-qwen25-instyle"
+ ],
+ "competition_sources": [
+  "name-that-llm"
+ ],
+ "model_sources": [
+  "qwen-lm/qwen-3/Transformers/8b-base/1",
+  "qwen-lm/qwen-3/Transformers/4b-base/1",
+  "qwen-lm/qwen-3/Transformers/14b-base/1",
+  "qwen-lm/qwen2.5/Transformers/7b/1"
+ ]
+}

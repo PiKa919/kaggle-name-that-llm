@@ -1,0 +1,103 @@
+{
+ "quality": [
+  {
+   "rep": "pipeline unigram",
+   "cut": 0.05
+  },
+  {
+   "rep": "pipeline unigram",
+   "cut": 0.1
+  },
+  {
+   "rep": "pipeline unigram",
+   "cut": 0.15
+  }
+ ],
+ "end_to_end": [
+  {
+   "fold": 0,
+   "tag": "raw argmax",
+   "ba": 0.28908045977011493
+  },
+  {
+   "fold": 0,
+   "tag": "ORACLE soft centring w=0.25",
+   "ba": 0.30197956577266916
+  },
+  {
+   "fold": 0,
+   "tag": "ORACLE soft centring w=0.5",
+   "ba": 0.3167305236270753
+  },
+  {
+   "fold": 0,
+   "tag": "ORACLE soft centring w=1.0",
+   "ba": 0.3335249042145593
+  },
+  {
+   "fold": 0,
+   "tag": "ORACLE constrained assignment",
+   "ba": 0.35019157088122604
+  },
+  {
+   "fold": 0,
+   "tag": "recovered soft centring w=0.25 (cut 0.05)",
+   "ba": 0.30197956577266916
+  },
+  {
+   "fold": 0,
+   "tag": "recovered soft centring w=0.5 (cut 0.05)",
+   "ba": 0.31487867177522344
+  },
+  {
+   "fold": 0,
+   "tag": "recovered soft centring w=1.0 (cut 0.05)",
+   "ba": 0.32611749680715196
+  },
+  {
+   "fold": 0,
+   "tag": "recovered constrained assignment (cut 0.05)",
+   "ba": 0.3427841634738187
+  },
+  {
+   "fold": 0,
+   "tag": "recovered soft centring w=0.25 (cut 0.1)",
+   "ba": 0.3019795657726692
+  },
+  {
+   "fold": 0,
+   "tag": "recovered soft centring w=0.5 (cut 0.1)",
+   "ba": 0.31487867177522344
+  },
+  {
+   "fold": 0,
+   "tag": "recovered soft centring w=1.0 (cut 0.1)",
+   "ba": 0.32056194125159637
+  },
+  {
+   "fold": 0,
+   "tag": "recovered constrained assignment (cut 0.1)",
+   "ba": 0.3298212005108556
+  },
+  {
+   "fold": 0,
+   "tag": "recovered soft centring w=0.25 (cut 0.15)",
+   "ba": 0.3001277139208174
+  },
+  {
+   "fold": 0,
+   "tag": "recovered soft centring w=0.5 (cut 0.15)",
+   "ba": 0.3093869731800767
+  },
+  {
+   "fold": 0,
+   "tag": "recovered soft centring w=1.0 (cut 0.15)",
+   "ba": 0.3093869731800766
+  },
+  {
+   "fold": 0,
+   "tag": "recovered constrained assignment (cut 0.15)",
+   "ba": 0.3075989782886335
+  }
+ ]
+}

@@ -1,0 +1,85 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Caches and tooling
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.hypothesis/
+
+# Agent & Workspace Tooling artifacts
+.superpowers/
+.playwright-mcp/
+.ua/tmp/
+.ua/intermediate/
+
+# Scratch & Downloaded data caches (external datasets up to 1.8GB)
+scratch/
+tmp/
+comp_view.json
+t1.json
+*.html
+/data/*.csv
+/data/*.parquet
+
+# Large matrix and embedding caches
+*.npz
+*.npy
+*.parquet
+*.zip
+*.tar.gz
+*.tar
+experiments/cache*
+experiments/oof/dump*
+experiments/oof/dataset/
+experiments/oof/harvest/
+
+# Model weights
+weights/
+*.bin
+*.pt
+*.pth
+*.safetensors
+*.ckpt
+
+# Submission outputs & local runtime logs
+submission.parquet
+*.log
+
+# OS metadata
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

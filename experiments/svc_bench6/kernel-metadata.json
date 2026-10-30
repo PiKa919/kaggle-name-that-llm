@@ -1,0 +1,20 @@
+{
+  "id": "pikaaa/ntl-svc-bench6",
+  "title": "NTL SVC Bench6",
+  "code_file": "script.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [
+    "nishantdahal/ntl-two-stage-lora",
+    "ahmedberatozer/ntl-pool-v4",
+    "dhruvtibarewal/nlm-matched-clean",
+    "sunny114514/ntl-mega-corpus"
+  ],
+  "competition_sources": [
+    "name-that-llm"
+  ],
+  "kernel_sources": []
+}

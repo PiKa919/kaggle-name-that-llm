@@ -1,0 +1,21 @@
+{
+  "id": "pikaaa/name-that-llm-grandmaster-blend",
+  "title": "Name That LLM - Grandmaster Blend",
+  "code_file": "submission_grandmaster.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": "true",
+  "enable_gpu": "true",
+  "enable_tpu": "false",
+  "enable_internet": "false",
+  "dataset_sources": [
+    "nishantdahal/ntl-two-stage-lora"
+  ],
+  "competition_sources": [
+    "name-that-llm"
+  ],
+  "kernel_sources": [],
+  "model_sources": [
+    "qwen-lm/qwen-3/transformers/8b-base/1"
+  ]
+}

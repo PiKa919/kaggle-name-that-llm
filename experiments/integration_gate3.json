@@ -1,0 +1,152 @@
+{
+  "length_bins": [
+    {
+      "bin": "0-60",
+      "n": 555,
+      "base": 0.28225475920256593,
+      "short": 0.21412850333310202,
+      "delta": -0.06812625586946391
+    },
+    {
+      "bin": "60-80",
+      "n": 442,
+      "base": 0.3594508673916887,
+      "short": 0.2381384150828595,
+      "delta": -0.1213124523088292
+    },
+    {
+      "bin": "80-120",
+      "n": 609,
+      "base": 0.3588452549917727,
+      "short": 0.2538054558827362,
+      "delta": -0.10503979910903655
+    },
+    {
+      "bin": "120-160",
+      "n": 439,
+      "base": 0.4418551699170765,
+      "short": 0.34016582440964,
+      "delta": -0.10168934550743652
+    },
+    {
+      "bin": "160-300",
+      "n": 654,
+      "base": 0.4166501841021052,
+      "short": 0.3271058312373221,
+      "delta": -0.08954435286478307
+    }
+  ],
+  "cluster_recovery": [
+    {
+      "repr": "sibling_dense",
+      "threshold": 0.6,
+      "n_clusters": 248,
+      "purity": 0.26787699147832533,
+      "median_size": 6.0,
+      "bacc": 0.25004971414367394,
+      "delta_vs_oracle_cluster": -0.24672632363907532
+    },
+    {
+      "repr": "sibling_dense",
+      "threshold": 0.8,
+      "n_clusters": 49,
+      "purity": 0.11115227862171174,
+      "median_size": 37.0,
+      "bacc": 0.2552274422073079,
+      "delta_vs_oracle_cluster": -0.24154859557544134
+    },
+    {
+      "repr": "sibling_dense",
+      "threshold": 0.95,
+      "n_clusters": 11,
+      "purity": 0.047424972211930344,
+      "median_size": 209.0,
+      "bacc": 0.31858811831966194,
+      "delta_vs_oracle_cluster": -0.17818791946308732
+    },
+    {
+      "repr": "sibling_dense",
+      "threshold": 1.1,
+      "n_clusters": 1,
+      "purity": 0.006669136717302705,
+      "median_size": 2699.0,
+      "bacc": 0.37119065374098936,
+      "delta_vs_oracle_cluster": -0.1255853840417599
+    },
+    {
+      "repr": "posterior_sqrt",
+      "threshold": 0.6,
+      "n_clusters": 1,
+      "purity": 0.006669136717302705,
+      "median_size": 2699.0,
+      "bacc": 0.37119065374098936,
+      "delta_vs_oracle_cluster": -0.1255853840417599
+    },
+    {
+      "repr": "posterior_sqrt",
+      "threshold": 0.8,
+      "n_clusters": 1,
+      "purity": 0.006669136717302705,
+      "median_size": 2699.0,
+      "bacc": 0.37119065374098936,
+      "delta_vs_oracle_cluster": -0.1255853840417599
+    },
+    {
+      "repr": "posterior_sqrt",
+      "threshold": 0.95,
+      "n_clusters": 1,
+      "purity": 0.006669136717302705,
+      "median_size": 2699.0,
+      "bacc": 0.37119065374098936,
+      "delta_vs_oracle_cluster": -0.1255853840417599
+    },
+    {
+      "repr": "posterior_sqrt",
+      "threshold": 1.1,
+      "n_clusters": 1,
+      "purity": 0.006669136717302705,
+      "median_size": 2699.0,
+      "bacc": 0.37119065374098936,
+      "delta_vs_oracle_cluster": -0.1255853840417599
+    },
+    {
+      "repr": "dense+posterior",
+      "threshold": 0.6,
+      "n_clusters": 15,
+      "purity": 0.045572434234901815,
+      "median_size": 84.0,
+      "bacc": 0.2000472284364902,
+      "delta_vs_oracle_cluster": -0.29672880934625906
+    },
+    {
+      "repr": "dense+posterior",
+      "threshold": 0.8,
+      "n_clusters": 1,
+      "purity": 0.006669136717302705,
+      "median_size": 2699.0,
+      "bacc": 0.37119065374098936,
+      "delta_vs_oracle_cluster": -0.1255853840417599
+    },
+    {
+      "repr": "dense+posterior",
+      "threshold": 0.95,
+      "n_clusters": 1,
+      "purity": 0.006669136717302705,
+      "median_size": 2699.0,
+      "bacc": 0.37119065374098936,
+      "delta_vs_oracle_cluster": -0.1255853840417599
+    },
+    {
+      "repr": "dense+posterior",
+      "threshold": 1.1,
+      "n_clusters": 1,
+      "purity": 0.006669136717302705,
+      "median_size": 2699.0,
+      "bacc": 0.37119065374098936,
+      "delta_vs_oracle_cluster": -0.1255853840417599
+    }
+  ],
+  "bacc_oracle_cluster_ot": 0.49677603778274926,
+  "bacc_no_ot": 0.37895351727566495,
+  "runtime_seconds": 305.0
+}

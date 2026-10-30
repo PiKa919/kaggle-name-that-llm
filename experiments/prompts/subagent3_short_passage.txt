@@ -1,0 +1,23 @@
+You are DeepSeek Subagent 3: Short-Passage Specialization & Adversarial Robustness Specialist for the Kaggle "Name That LLM" competition.
+
+YOUR MISSION:
+Author a standalone, high-performance module `src/short_passage_engine.py` designed specifically to solve the short-passage failure mode (<60 words, which constitutes 21.5% of the competition data and suffers severe accuracy collapse to ~0.27 vs ~0.46 for long passages).
+
+CONTEXT & PROBLEM:
+In passages with fewer than 60 words, semantic representation layers in 8B foundation models lose discrimination because self-attention has insufficient context tokens to resolve deep author personas. However, surface-level token n-grams, morpho-syntactic shape sequences, and punctuation distributions remain invariant regardless of text length.
+
+REQUIREMENTS:
+1. Pure numpy/scipy/scikit-learn implementation.
+2. Function `extract_short_passage_features(texts: List[str]) -> np.ndarray`:
+   Extracts high-density character 1-to-4 grams, prefix/suffix morphology (first 10 and last 10 characters), word shape encodings (capitalization patterns like "Xx", "ALL_CAPS", "camelCase"), contraction frequencies ("can't", "don't", "it's", "I've"), and clause boundary punctuation.
+3. Class `ShortPassageFallbackModel`:
+   A specialized high-regularization classifier (calibrated linear ensemble) trained strictly on short (<80 words) and truncated training passages with balanced class weighting.
+   Includes `.fit(texts_train, y_train, word_counts_train)` and `.predict_proba(texts_test)`.
+4. Function `entropy_regularized_short_gate(P_semantic: np.ndarray, P_short: np.ndarray, word_counts: np.ndarray, L0: float = 65.0, tau: float = 10.0) -> np.ndarray`:
+   Dynamically blends the semantic model with the specialized short-passage model via smooth sigmoid temperature gating:
+       w = 1 / (1 + exp((word_counts - L0) / tau))
+       P_fused = (1 - w) * P_semantic + w * P_short
+   with entropy bounding so low-confidence predictions default to the balanced prior rather than spuriously locking onto a random sibling.
+5. Provide a test suite function `test_short_passage_invariants()` at the bottom.
+
+Write complete, production-grade Python code that can be saved directly to `src/short_passage_engine.py`. Output ONLY the Python code in a ```python code block.

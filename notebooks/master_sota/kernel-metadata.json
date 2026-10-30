@@ -1,0 +1,24 @@
+{
+  "id": "pikaaa/name-that-llm-sota-master-ensemble",
+  "title": "name that llm sota master ensemble",
+  "code_file": "submission_sota.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": "true",
+  "enable_gpu": "true",
+  "enable_tpu": "false",
+  "enable_internet": "false",
+  "dataset_sources": [
+    "nishantdahal/ntl-two-stage-lora",
+    "lightningv08/ntl-olmo2-native24-final-inference-assets"
+  ],
+  "competition_sources": [
+    "name-that-llm"
+  ],
+  "kernel_sources": [],
+  "model_sources": [
+    "qwen-lm/qwen-3/transformers/8b-base/1",
+    "qwen-lm/qwen-3/transformers/14b-base/1",
+    "allenai/olmo-2/transformers/1124-7b/1"
+  ]
+}

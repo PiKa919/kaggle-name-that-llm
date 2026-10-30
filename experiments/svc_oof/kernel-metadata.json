@@ -1,0 +1,21 @@
+{
+  "id": "pikaaa/ntl-svc-oof-weight-fit",
+  "title": "NTL SVC OOF weight fit",
+  "code_file": "script.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [
+    "nishantdahal/ntl-two-stage-lora",
+    "ahmedberatozer/ntl-pool-v4",
+    "dhruvtibarewal/nlm-matched-clean",
+    "sunny114514/ntl-mega-corpus",
+    "pikaaa/ntl-public-oof"
+  ],
+  "competition_sources": [
+    "name-that-llm"
+  ],
+  "kernel_sources": []
+}

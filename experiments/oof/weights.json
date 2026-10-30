@@ -1,0 +1,27 @@
+{
+ "weights": {
+  "tfidf": 0.0,
+  "q14v5_gauss": 0.7,
+  "q14v5": 3.0,
+  "q14v5_twin": 1.0499999999999998,
+  "q8v5_gauss": 0.44,
+  "q8v5": 2.0,
+  "q8v5_twin": 0.7,
+  "ll8v5": 1.0,
+  "ll8v5_twin": 0.35,
+  "n14b": 2.5,
+  "n14b_twin": 0.875,
+  "q25_14": 1.0,
+  "q25_14_twin": 0.35,
+  "deb": 1.0
+ },
+ "adapt_w": 1.0,
+ "adapt_thr": 0.15,
+ "sinkhorn": 0.45,
+ "sinkhorn_target_mix": 0.35,
+ "atlas_w": "0",
+ "comp_w": 0.0,
+ "sk_div": 1,
+ "perpassage": 1,
+ "post": 0
+}

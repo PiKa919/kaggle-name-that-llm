@@ -1,0 +1,995 @@
+Thinking: The user wants a complete production-grade Python module. Let me check the workspace first to match conventions, then write the file. The instruction says "Output ONLY the Python code in a ```python code block." But I'm an agent with tools; I should write the file to src/sibling_features.py and also output the code. Let me look at existing src structure to match style.
+
+Let me quickly inspect.
+Thinking: There is already a src/sibling_features.py that is 80KB! Interesting. That's probably from another agent or prior work. The task says "Author a standalone module". I should investigate existing file to avoid overwriting user work (per instructions: treat unfamiliar files as potential user work and investigate before deleting/overwriting).
+
+Let me look at it. 80KB is huge. Let me check its structure.
+Thinking: The file already exists and is quite comprehensive (2154 lines, 101 features). It seems it was already authored — perhaps by a previous run of me (the timestamp 02:29 today). The user asks to author it. Maybe the existing file is stale/incomplete or is exactly what's needed. Let me check whether it has the required functions and pair mapping, and whether tests pass.
+
+I should check: does it have all 10 pairs? Does `extract_sibling_features` exist, `get_pair_feature_indices`, `test_sibling_features_invariants`? And check tests run.
+
+Given it's 80KB and already implements all requirements, the best move may be to verify and reuse rather than overwrite with a worse version. But the user explicitly asks for code output. Hmm. The file appears to be the deliverable from a previous sibling agent session — possibly identical task. The date 02:29 is very recent relative to now.
+
+Let me inspect key sections: SIBLING_PAIRS, the extract function, pair indices, and the test. Then decide. If it's complete and passing, I could output the existing code... but 2154 lines / 80KB would be massive output. The user wants the code in a code block. Outputting 80KB is impractical but that's the request.
+
+Hmm, wait. Maybe the file is actually incomplete/buggy (e.g., the tail is truncated mid-writing). Let me check the tail and run the invariants test.
+Thinking: The file is complete and matches the requirements (2154 lines, 101 features, 10 pairs, tests). It seems a prior agent already wrote this exact deliverable. Let me run the test to confirm it passes. Then decide on output.
+
+The prompt is from a "DeepSeek Subagent 1" mission — likely part of an orchestrated multi-agent workflow, and this file may be the previous output of the same agent (perhaps re-invocation). Since it already exists and satisfies requirements, I should verify correctness and possibly improve/keep. But the user wants complete code output in a python block.
+
+Let me run the module's test.
+Thinking: The existing module is complete, tested, passes. The task likely is a re-run / continuation. Options:
+
+1. Output the existing 2154-line file as code (huge; ~80KB, maybe 25k tokens). The user asked for it.
+2. Re-author a more compact, equally complete module (~600-800 lines) that satisfies all requirements, overwrite the file, and output that. But overwriting loses the richer 2154-line implementation — a violation of "treat unfamiliar files as potential user work."
+
+Hmm. But the file is clearly the deliverable of this exact mission (matches every requirement, docstrings, test at bottom). Most likely I (or another agent) already produced it and the harness re-asked. The best action: verify quality, check for any gaps vs. the 10 pair-specific rationales, and report that it exists + passes, without duplicating 80KB. But the user's explicit formatting instruction says output only the Python code.
+
+Given the instruction conflict, the file's existence is decisive: rewriting it with a shorter version would degrade value. I can output the file's code. 80KB is a lot but the request is explicit. However, output token limits may truncate — 80KB ≈ 20-25k tokens, feasible in a large response? Risky.
+
+Alternative: improve the existing file where it's weak, then output it. But output length remains.
+
+Let me consider: maybe the existing file is from a different agent working in parallel (timestamps 02:29, this session presumably later). Instructions say investigate — done. It's complete and passing.
+
+Best resolution: verify it satisfies every requirement thoroughly, check for bugs (e.g., normalization edge cases, empty input, pair coverage), fix anything weak, then present the code. For output, I'll paste the full file — that's the deliverable. But 2154 lines... I could output it, but risk truncation mid-way.
+
+Practical approach used by such tasks: produce the code block. I can output the full file content by reading it and repeating. That's an enormous response. Alternatively, I could write a leaner yet complete module (~700 lines) from scratch that meets the requirements exactly and keep the existing rich file as a backup? No — overwriting user work is bad.
+
+Let me check git: not a repo. Check if the file is referenced by tests or other modules — if other modules import it, it's established work.
+Thinking: No references (grep failed due to zsh glob). Let me redo properly.
+Thinking: There's `experiments/20_run_3_deepseek_subagents.py` referencing prompt file `experiments/prompts/subagent1_sibling_features.txt`. So this is a framework where I'm subagent 1 and the file was already produced by a prior run (probably run 3). Let me look at that runner and the prompt to understand expectations, and whether outputs are expected to differ (e.g., "run 3" variants, different implementations to ensemble). Check experiments dir for prior outputs.
+Thinking: There is `experiments/subagent1_raw.txt` — probably the raw output from the prior run that generated the 2154-line file. The orchestrator extracts the longest python code block from stdout and writes it to src/sibling_features.py. So this session is likely a re-run or the same task, and the existing file is the previous output.
+
+Since the orchestrator only extracts a python code block from my final message, I MUST output the code in a block for it to be captured. And it will overwrite src/sibling_features.py with whatever I output. So if I output a shorter-but-complete version, it replaces the existing. Hmm. If I fail to output a block, fallback returns whole output (bad).
+
+Given that, the best is to output a complete, high-quality implementation. Since the existing file was validated (tests pass) and is richer, ideally I'd output it verbatim. But 2154 lines… The orchestrator has a 180s timeout per agent (!). My response time doesn't matter for output extraction, only total runtime. Outputting 80KB is fine for the harness.
+
+But can I reliably reproduce 80KB? I can read the file in chunks and echo them. That's mechanical. However, the response will be enormous and possibly truncated by output limits. Let me check the file size in characters: 80,247 bytes. Typical output limit maybe 32k tokens (~100KB+)? Risky but possible.
+
+Alternative approach: write an improved, compact (~900 line) implementation that covers all requirements with strong feature engineering — the deliverable is mine to author, and the orchestrator overwrites anyway. The existing 2154-line file might have been generated by the same model earlier; a leaner but thorough version (e.g., 101 features retained) could be equally good. But losing the existing richness (e.g., 101 features with carefully chosen pair mappings) may reduce ensemble diversity? Actually if this is "run 3", maybe they intend fresh runs to compare. The naming "20_run_3_deepseek_subagents.py" suggests run 3 of experiments, not 3 variants.
+
+Best plan: author a fresh, self-contained module that is comprehensive yet compact (~800-1000 lines), ensuring all 10 pairs have specific, well-documented features, robust normalization, honest tests. Then write it to src/sibling_features.py (backing up the old one? No—orchestrator will overwrite anyway; but preserving as .bak could clutter. I'll skip backup since the raw prior output exists? Hmm, actually I shouldn't destroy work. I can copy existing file to experiments/cache or .bak before overwrite. But the orchestrator overwrites after my response with extracted code, so writing now is just for local verification.)
+
+Wait — the actual harness: I'm running as the subagent inside OpenCode, and the orchestrator captures my stdout. So my final answer must contain the code block. I can write the file locally too for testing, then output it.
+
+Decision: Keep existing file intact until I decide. Given quality/verification effort, perhaps output the existing file verbatim, verified. It's already tested. Outputting 80KB is a lot but it is the highest-value artifact. However, the risk of mid-output corruption/truncation is real, and the harness timeout is 180s (irrelevant).
+
+Let me check subagent1_raw.txt to see whether it equals the file — that tells me the prior run output was accepted as-is.
+Thinking: The existing file is high quality and passes. This session appears to be a re-run of the same prompt; experiments/subagent1_raw.txt shows the previous session's thinking (same as mine!). Wait — subagent1_raw.txt is only 9035 bytes and contains my own thinking from this very session? It says "Thinking: The user wants a complete production-grade Python module. Let me check the workspace first..." — that's my current thinking! That means the orchestrator captured stdout of an in-progress run... Interesting: subagent1_raw.txt is being written live by the orchestrator, containing my streamed output. So the orchestrator is running me now, and the 80KB file is from a previous run (maybe the same orchestrator earlier, timestamp 02:29).
+
+So my output will overwrite src/sibling_features.py. The prior file was probably from an earlier invocation of this exact prompt (maybe an earlier run that timed out at 180s while writing?). It's complete though.
+
+Key insight: the prior agent likely wrote the file with tools, and then its final response contained the full code block, which the orchestrator extracted to produce the 80KB file. Or the orchestrator's write happened, then truncated? No, file is complete with test at end.
+
+Given the file is already excellent and validated, my best deliverable is to output it verbatim. But practically, re-emitting 80KB risks truncation and time. The orchestrator has timeout=180s for the subprocess. My session's wall clock includes tool calls + generation. If it times out, subprocess kills and output may be discarded. Hmm, risky! A long 80KB generation might take a few minutes on this model.
+
+Wait — does the timeout apply? In run_agent, subprocess.run(..., timeout=180). If exceeded, TimeoutExpired raised; output lost. So I need to be fast. Generating 80KB would definitely blow past 180s likely invalid? Actually generation speed maybe 50 tok/s → 25k tokens = 500s. Way over. So I must produce a compact module.
+
+Therefore: author a fresh, compact (~500-700 lines) production module. It must satisfy all requirements and be verifiable. I'll write it, test, and output.
+
+I should not lose the prior file's value... but the orchestrator will overwrite regardless with my output. I can preserve a copy to experiments/cache_sibling_features_v1.py for reference. That's a good safeguard.
+
+Now design the module.
+
+Requirements:
+- numpy/scipy/stdlib only. (scipy optional — actually avoid entirely.)
+- `extract_sibling_features(texts: List[str]) -> np.ndarray` (N,D) float64, normalized robust z or quantile.
+- `get_pair_feature_indices(pair) -> List[int]`.
+- Docstrings with rationale per feature.
+- `test_sibling_features_invariants()` at bottom.
+
+Design: registry of feature functions with docstring rationale. Aim ~70-80 features covering the 10 pairs. Must be careful with regex escaping in the code block.
+
+Feature families:
+A. Typography: em dash spacing/count, en dash, double hyphen, semicolons, colons, parentheses, brackets, ellipses, curly/straight dq/sq shares, quote style entropy, question marks, exclamations, commas, digits, numbers, markdown headers/lists/bold/code/tables.
+B. Structure: sentence length mean/std/cv/median, short/long sentence share, paragraph stats, list lines, line lengths, single-sentence paragraphs.
+C. Lexical: TTR, root TTR, Yule's K (log), Simpson, hapax, mean/std word length, chars/word, long/short word share, polysyllables, latinate, abstract nouns, stopwords, contraction.
+D. Persona/tone: 1st singular/plural, 2nd person, 3rd person, contractions, hedges, boosters, discourse markers (reasoning: therefore/consequently/specifically/in other words; grounded: in practice, for example, the fact that), contrastive connectives, additive connectives, causal.
+E. Narrative/sensory: dialogue tags, quotation-sentence share, narrative time markers, action verbs, sensory descriptors, color, sound, texture, light, temperature, pacing index.
+F. Technical: technical terms, definitional patterns ("is a", "refers to"), math symbols, code-ish tokens.
+
+Normalization: robust z per column: (x - median)/(IQR/1.349), fallback to std, then 0 if degenerate, clip ±8. Quantile mode: rank → [-1,1]. Handle NaN→0.
+
+Also expose FEATURE_NAMES, FEATURE_DOCS, N_FEATURES, SIBLING_PAIRS, PAIR_FEATURE_NAMES, get_pair_feature_names, feature_names, feature_doc, extract_raw_sibling_features.
+
+Implementation details:
+- `_TextStats` with __slots__ computing everything once.
+- sentence split with masking decimals and abbreviations.
+- robust helper `_median`, `_quantile` via numpy per doc? Per-doc use sorted lists and own percentile to avoid numpy overhead—but fine to use np.
+
+Tokenization: `_WORD_RE = re.compile(r"[^\W\d_]+(?:['\u2019][^\W\d_]+)*", re.UNICODE)`. words lowercase for lexical sets.
+
+Yule's K: K = 10^4 * (sum_i i^2 * V_i - N) / N^2 where V_i = number of types occurring i times. log1p.
+
+Let me be careful about feature count and runtime for 4000 docs: per-doc loops over ~15 regexes and word list; fine.
+
+Pair mapping: names must exist. I'll define carefully.
+
+Now, should I preserve compatibility with the existing file's schema? Other modules might import it... grep showed only the orchestrator references. So no external dependency. Still, keep the same public API names.
+
+Let me now write the compact module (~700 lines). I need to be efficient in output but thorough.
+
+Plan features (target ~78):
+
+Typography (24):
+1 em_dash_total_per_100w
+2 em_dash_spaced_share
+3 em_dash_spaced_per_100w
+4 em_dash_unspaced_per_100w
+5 em_dash_per_sentence
+6 en_dash_per_100w
+7 double_hyphen_per_100w
+8 hyphenated_per_100w
+9 semicolon_per_100w
+10 colon_per_100w
+11 paren_open_per_100w
+12 paren_pair_per_sentence
+13 ellipsis_per_100w
+14 curly_dq_share
+15 straight_dq_share
+16 curly_sq_share
+17 curly_apostrophe_share
+18 dq_style_entropy
+19 question_mark_per_sentence
+20 question_sentence_share
+21 exclamation_per_100w
+22 comma_per_100w
+23 digit_char_share
+24 number_token_per_100w
+25 punct_per_100w
+
+Structure (14):
+26 log_word_count
+27 mean_sentence_words
+28 std_sentence_words
+29 cv_sentence_words
+30 median_sentence_words
+31 short_sentence_share
+32 long_sentence_share
+33 sentence_count_log
+34 paragraph_count_log
+35 mean_paragraph_words
+36 std_paragraph_words
+37 single_sentence_paragraph_share
+38 sentences_per_paragraph
+39 list_item_per_100w
+40 list_line_share
+41 markdown_header_per_100w
+42 markdown_header_present
+43 bold_span_per_100w
+44 code_span_per_100w
+45 mean_line_words
+46 short_line_share
+
+Lexical (15):
+47 ttr
+48 root_ttr
+49 yule_k_log
+50 simpson_d
+51 hapax_share
+52 mean_word_length
+53 std_word_length
+54 chars_per_word
+55 long_word_share
+56 short_word_share
+57 polysyllable_share
+58 latinate_share
+59 abstract_noun_share
+60 stopword_share
+61 contraction_per_100w
+
+Persona/discourse (14):
+62 first_person_singular_per_100w
+63 first_person_plural_per_100w
+64 second_person_per_100w
+65 third_person_per_100w
+66 hedge_per_100w
+67 booster_per_100w
+68 reasoning_marker_per_100w
+69 grounded_marker_per_100w
+70 contrastive_connective_per_100w
+71 additive_connective_per_100w
+72 causal_connective_per_100w
+73 definitional_per_100w
+74 technical_term_per_100w
+75 math_symbol_per_100w
+
+Narrative (10):
+76 dialogue_tag_per_100w
+77 dialogue_sentence_share
+78 narrative_marker_per_100w
+79 action_verb_per_100w
+80 sensory_descriptor_per_100w
+81 color_term_per_100w
+82 sound_term_per_100w
+83 texture_term_per_100w
+84 light_term_per_100w
+85 temperature_term_per_100w
+86 narrative_pacing_index
+
+That's 86. Fine.
+
+Need to be careful about regex escapes inside the final code block; output raw code (no ``` nesting issues).
+
+For pair routing, choose ~8-12 names each.
+
+Also docstrings per feature via registry. To keep code compact, use `_register(name, doc)` decorator that appends to `_SPECS`.
+
+Let me write the file now. I'll write to src/sibling_features.py after backing up. Actually, backup location: experiments/sibling_features_v1_backup.py. Hmm, adding clutter; but safe. I'll copy to `experiments/archive/sibling_features_run2.py`.
+
+Let me draft code carefully.
+
+Key helper: robust normalization must handle NaN/inf.
+
+```python
+def _robust_zscore(raw, clip=8.0):
+    X = np.asarray(raw, dtype=np.float64)
+    if X.size == 0: return X.copy()
+    med = np.median(X, axis=0)
+    q25 = np.percentile(X, 25, axis=0)
+    q75 = np.percentile(X, 75, axis=0)
+    scale = (q75 - q25) / 1.349
+    std = X.std(axis=0)
+    scale = np.where(scale > 1e-12, scale, np.where(std > 1e-12, std, 1.0))
+    Z = (X - med) / scale
+    Z = np.nan_to_num(Z, nan=0.0, posinf=clip, neginf=-clip)
+    return np.clip(Z, -clip, clip)
+```
+
+Quantile: average ranks per column scaled to [-1,1]; constant column → 0.
+
+```python
+def _quantile_scale(raw):
+    X = np.asarray(raw, float)
+    if X.size == 0: return X.copy()
+    out = np.zeros_like(X)
+    for j in range(X.shape[1]):
+        col = X[:, j]
+        order = np.argsort(col, kind="mergesort")
+        ranks = np.empty(len(col), float)
+        ranks[order] = np.arange(len(col), dtype=float)
+        # average ties
+        _, inv, counts = np.unique(col, return_inverse=True, return_counts=True)
+        sums = np.zeros(len(counts)); np.add.at(sums, inv, ranks)
+        ranks = (sums / counts)[inv]
+        if len(col) > 1:
+            out[:, j] = 2.0 * ranks / (len(col) - 1) - 1.0
+    return out
+```
+
+For N=1, quantile gives 0? ranks = 0 → 2*0/0 -> division; guard len>1 → out stays 0.
+
+Text stats computation:
+
+```python
+class _TextStats:
+    __slots__ = (...)
+    def __init__(self, text):
+        self.text = text or ""
+        ...
+```
+
+Compute:
+- paragraphs = [p for p in _PARA_RE.split(text) if p.strip()]
+- sentences: split by regex on masked text.
+- words = _WORD_RE.findall(text); lower words.
+- chars etc.
+
+Sentence splitting: 
+```python
+def _split_sentences(block):
+    masked = _DECIMAL_DOT_RE.sub("\x01", block)
+    masked = _ABBREV_DOT_RE.sub(lambda m: m.group(0).replace(".", "\x01"), masked)
+    parts = _SENT_RE.findall(masked)
+    return [p.replace("\x01",".").strip() for p in parts if p.strip() and _WORD_RE.search(p)]
+```
+Wait _SENT_RE on masked keeps \x01.
+
+Paragraph fallback: if no blank lines, paragraphs = lines? Use [text] if text.strip(). Since passages single paragraph, paragraph stats should use line blocks; I'll split on blank lines and fallback to non-empty lines, else whole text.
+
+Counts: use len(re.findall) per doc. To limit regex passes, precompute in __init__.
+
+Performance: ~86 features each computing from precomputed stats — fine.
+
+Sensory term lists: use regex of alternatives with \b. Compile once.
+
+Stopword set: frozenset of ~120 words.
+
+Latinate regex as earlier.
+
+Syllables: vowel-group counting.
+
+Yule: Counter over lower words; K = 1e4*(sum(f^2) - N)/N^2; log1p(max(K,0)).
+
+TTR = types/tokens; root_ttr = types/sqrt(tokens); hapax = count of freq==1 / types; simpson = sum(f*(f-1))/(N*(N-1)).
+
+std word length computed via np.std? Use manual mean/var to avoid numpy overhead per doc.
+
+Now writing docstrings per feature. Registry decorator:
+
+```python
+_SPECS: List[_FeatureSpec] = []
+
+def _feature(name, doc):
+    def deco(fn):
+        _SPECS.append(_FeatureSpec(name, doc, fn))
+        return fn
+    return deco
+```
+
+Each feature function takes stats -> float, clamps non-finite.
+
+Pair mappings defined via names; validate at import that each name exists.
+
+Tests: include shape, dtype, finiteness, clipping, N=1 zeros, empty, constant, permutation equivariance, quantile bounds, determinism, schema uniqueness, docs length, 10 pairs, order-insensitive lookup, unknown pair KeyError, malformed TypeError, stylometric sanity (curly quotes, em dash spaced share, questions, list detection, digit share, TTR monotonic-ish, GLM chars/word).
+
+Note test for "spaced em dash" — ensure regex `(?<=\s)—(?=\s)`; text "a — b" yes.
+
+Em dash unspaced: `—` not surrounded by spaces: use total - spaced.
+
+quote style entropy: p = curly_dq/(curly+straight), entropy binary.
+
+Curly apostrophe share: curly apostrophes/(curly+straight apostrophes). Straight apostrophe counts only intra-word? Simpler: count all `'`.
+
+Question sentence share: sentences ending in ?. 
+
+Dialogue detection: sentences containing “ ” or " with a tag verb or any quotes? dialogue_sentence_share = share of sentences containing quote marks. dialogue_tag: r'\b(said|asked|replied|whispered|murmured|shouted|answered|cried|laughed|sighed|muttered|exclaimed|added|continued|explained|told)\b' per 100w.
+
+Narrative markers: then, later, before, after, once, suddenly, finally, meanwhile, eventually, at last, that night, the next day, years later.
+
+Action verbs: ran, walked, turned, opened, closed, looked, stood, sat, grabbed, pulled, pushed, threw, reached, stepped, moved, lifted, dropped, held, watched, listened, felt, smiled, nodded, knelt.
+
+Sensory descriptors: soft, rough, warm, cold, bright, dark, sweet, bitter, sharp, smooth, heavy, light, damp, dry, fragrant, metallic, salty, crisp, faint, loud, quiet, silence, scent, smell, taste, touch, texture.
+
+Careful overlap with light/temperature; fine.
+
+Technical terms: algorithm, entropy, gradient, theorem, function, parameter, equation, system, energy, particle, quantum, neuron, protein, cell, model, data, probability, distribution, structure, mechanism, process, hypothesis, experiment, evidence, theory.
+
+Math symbols: =, +, ×, ÷, ≤, ≥, ≠, ≈, ∞, ∑, ∫, √, ^, %.
+
+Definitional: r"\b(is|are|refers to|denotes|means|can be defined as|is defined as|consists of)\b" — too broad (is/are common). Use only "refers to|defined as|is a kind of|consists of|denotes".
+
+Reasoning markers: therefore, consequently, thus, hence, specifically, in other words, moreover, furthermore, it follows that, this implies, as a result, accordingly, so that.
+
+Grounded markers: in practice, for example, for instance, in fact, the fact that, consider, suppose, imagine, take the case, concretely, in reality, here, this means, that is.
+
+Hedges: perhaps, maybe, might, could, seems, appears, likely, possibly, arguably, somewhat, rather, fairly, in some sense, tend to.
+
+Boosters: clearly, certainly, indeed, obviously, undoubtedly, always, never, must, absolutely, fundamentally, crucially, remarkably.
+
+Contrastive: however, but, yet, although, though, nevertheless, nonetheless, whereas, while, despite, in contrast, on the other hand, instead.
+
+Additive: and, also, moreover, furthermore, in addition, additionally, besides, similarly, likewise.
+
+Causal: because, since, therefore, thus, hence, consequently, so, as a result, due to, owing to, leads to, causes.
+
+Careful: "so" too common; use r"\b(?:because|since|therefore|thus|hence|consequently|as a result|due to|owing to|leads? to|causes?)\b".
+
+Now, feature "connective_per_100w" mentioned in pair 4 lists; I have additive+contrastive+causal. I'll add a combined `connective_per_100w` to simplify pair mapping. Total 87.
+
+Also "list item" detection: lines starting with -, *, •, or numbered.
+
+Markdown header per 100w and present.
+
+mean_line_words: average words per non-empty line.
+
+OK. Also `token_boundary` features mentioned in the mission title: subword/token-boundary proxies. Add:
+- avg_token_chars? already chars/word.
+- punctuation_boundary_share = share of punctuation marks adjacent to word boundary? 
+- em_dash_unspaced share.
+Maybe add `word_punct_ratio` and `space_per_word`? Keep it reasonable.
+
+Add `space_per_100_chars` maybe not necessary.
+
+Let me include 3 "token-boundary" features:
+- `space_to_word_ratio` = spaces / words (tokenization artifact)
+- `punctuation_word_ratio` = punct chars / words
+- `clitic_share` = words with apostrophe / words (token boundary splitting behavior)
+- `digit_letter_adjacency`? skip.
+
+That brings to ~90.
+
+Now, normalization defaults: robust.
+
+Output code length target ~700 lines. Let me write it.
+
+Careful with regex strings in Python: use raw strings.
+
+Let me write the file with the write tool, then test, then output in final answer.
+
+One important detail: docstrings for each feature — doc decorator strings. I'll write concise but rationale-bearing (~1-2 sentences each). Must pass test len>40.
+
+Let me write now. I'll aim for correctness.
+
+For per-document stats, compute:
+- n_words, n_chars (len text), n_letters? 
+- words list, lower list
+- sentences list, sentence word counts
+- paragraphs
+- lines
+
+Counts dict via helper `_count(pattern, text)`.
+
+I'll precompute all punctuation counts in __init__ for speed.
+
+Code sketch:
+
+```python
+_PUNCT_COUNTS = {...}
+```
+
+Simpler: in __init__, compute each specific attribute lazily? No—just compute all ~25 counts with str.count where possible:
+text.count("—"), text.count("–"), text.count(";"), etc. For regex-based (spaced em dash, paren pairs) use re.
+
+em_dash_spaced = len(_EM_SPACED_RE.findall(text)); note regex with lookbehind/lookahead consumes char each match, overlapping not an issue.
+
+paren_pair: count of "(" and ")" min → pairs = min(open, close).
+
+quote counts: text.count('"'), text.count('“'), text.count('”'); curly dq total = count(“)+count(”). straight dq = count('"'). But a straight quote appears twice per quoted span; fine, share = curly/(curly+straight).
+
+apostrophes: text.count("'"), text.count("’").
+
+dq_style_entropy: binary entropy of curly share.
+
+Question marks: count("?") per sentence = count / max(n_sent,1). question_sentence_share = sentences ending with ?.
+
+digit_char_share = sum(c.isdigit())/len(text) (letters+digits only? use non-space chars maybe). Use all chars denominator max(len(text),1).
+
+number_token count regex.
+
+comma per 100w.
+
+punct_per_100w = count chars in _PUNCT_CHARS / n_words*100.
+
+Sentence lengths: word counts per sentence.
+
+Log features: math.log1p.
+
+Now lexical:
+types = len(set(lower)); tokens = len(lower).
+If tokens==0, guard.
+
+Simpson: Counter frequencies.
+
+Latinate: for word in lower if len>=4 and _LATINATE_RE.search(word). Note regex with $.
+
+Polysyllable: _syllables(w)>=3, len>=4.
+
+Stopword share.
+
+Contraction: words containing apostrophe; count findall _CONTRACTION_RE over text? Simpler: sum(1 for w in words if "'" in w or "’" in w) maybe overcounts possessives. Use regex `\b\w+['’](?:s|t|re|ve|ll|d|m)\b` findall.
+
+Persona pronoun sets.
+
+Now "technical_term_per_100w" and math.
+
+For narrative pacing: short_sentence_share * (1 + narrative_per_100w/5).
+
+Let's compute.
+
+Test performance on 2700 docs maybe ~1-2 s.
+
+Edge: `_coerce_texts` accepts str, None, iterable.
+
+Write the code.
+
+Also ensure no use of `List` in annotation? fine, from typing.
+
+One more: pair routes must exist; I'll validate at import.
+
+Pair routing details:
+
+1 opus-4-6 vs opus-5: em_dash_spaced_per_100w, em_dash_spaced_share, em_dash_style_entropy, em_dash_per_sentence, semicolon_per_100w, paren_open_per_100w, paren_pair_per_sentence, colon_per_100w, contrastive_connective_per_100w, comma_per_100w.
+
+2 opus-4-8 vs sonnet-5: ttr, root_ttr, yule_k_log, simpson_d, hapax_share, std_sentence_words, cv_sentence_words, latinate_share, polysyllable_share, mean_word_length, long_word_share, abstract_noun_share.
+
+3 fable vs opus-4-8: narrative_pacing_index, dialogue_tag_per_100w, dialogue_sentence_share, narrative_marker_per_100w, action_verb_per_100w, sensory_descriptor_per_100w, color_term_per_100w, sound_term_per_100w, texture_term_per_100w, light_term_per_100w, first_person_singular_per_100w, short_sentence_share.
+
+4 gemini 3.6 vs 3.7: mean_paragraph_words, sentences_per_paragraph, std_paragraph_words, single_sentence_paragraph_share, list_item_per_100w, list_line_share, connective_per_100w, mean_line_words, short_line_share, log_word_count.
+
+5 3.7 vs 3.8: curly_dq_share, dq_style_entropy, curly_sq_share, curly_apostrophe_share, question_mark_per_sentence, question_sentence_share, straight_dq_share.
+
+6 3.1-pro vs 3.7: markdown_header_per_100w, markdown_header_present, technical_term_per_100w, mean_sentence_words, std_sentence_words, polysyllable_share, latinate_share, bold_span_per_100w, list_item_per_100w, math_symbol_per_100w, definitional_per_100w.
+
+7 luna vs sol: em_dash_total_per_100w, em_dash_per_sentence, em_dash_spaced_share, yule_k_log, latinate_share, polysyllable_share, booster_per_100w, hedge_per_100w, mean_word_length, reasoning_marker_per_100w.
+
+8 sol vs terra: reasoning_marker_per_100w, grounded_marker_per_100w, causal_connective_per_100w, definitional_per_100w, hedge_per_100w, booster_per_100w, std_sentence_words, digit_char_share, number_token_per_100w, mean_sentence_words.
+
+9 gpt-5.5 vs astra: curly_dq_share, curly_apostrophe_share, dq_style_entropy, em_dash_total_per_100w, em_dash_unspaced_per_100w, comma_per_100w, semicolon_per_100w, ttr, mean_sentence_words.
+
+10 glm-5.3 vs flash: mean_sentence_words, median_sentence_words, short_sentence_share, chars_per_word, mean_word_length, digit_char_share, number_token_per_100w, semicolon_per_100w, em_dash_total_per_100w, std_sentence_words, punct_per_100w.
+
+Good.
+
+Now code. Write it.
+
+I need to keep total output manageable: ~650 lines. Let me be efficient with formatting (feature funcs 3-6 lines each). 90 features × 6 = 540 lines plus infra 250 = 800 lines. Output tokens ~9-10k. Acceptable.
+
+Actually, to reduce size, group simple features computed from stats attributes with short functions. Docstrings can be 2 lines.
+
+Let me write.
+
+I'll now produce the file content. Be careful that every feature name used in pair map is defined.
+
+Let me write the code in one go.
+
+```python
+"""
+Sibling-level stylometric feature engine for "Name That LLM".
+...
+"""
+from __future__ import annotations
+import math, re
+from collections import Counter
+from typing import Callable, Dict, Iterable, List, NamedTuple, Sequence, Tuple
+import numpy as np
+```
+
+Feature spec NamedTuple with name, doc, fn.
+
+Text stats:
+
+I'll write __init__ with a lot of computations.
+
+Consider performances: compiled regexes module-level.
+
+Let me write helper `_rate(count, n_words)`.
+
+Now write the actual file.
+
+For `_split_sentences`, ensure "..." not treated weirdly; use `[^.!?…]+[.!?…]*`.
+
+Abbrev masking: replace dots in common abbreviations. Implement simple.
+
+Note the masked char \x01 then restore.
+
+Paragraph splitting: `_PARA_RE.split(text)`; if only 1 paragraph and text has single newlines, split lines? For list stats, lines separate. I'll compute paragraphs as blank-line blocks; if len==1, use non-empty lines if >1 line else [text]. Hmm, for typical single-paragraph passages there are no newlines, so paragraphs=1.
+
+Let me define:
+```python
+blocks = [b.strip() for b in _PARA_RE.split(text) if b.strip()]
+lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+if len(blocks) <= 1:
+    paragraphs = lines if len(lines) > 1 else blocks
+else:
+    paragraphs = blocks
+```
+For list-only text, lines become paragraphs — could distort. Acceptable; alternatively keep blocks only. I'll keep blocks and add separate line stats; paragraph features use blocks (if empty → [text]). Simpler:
+```python
+paragraphs = blocks or ([text.strip()] if text.strip() else [])
+```
+But a text with newlines but no blank lines → 1 paragraph; fine.
+
+list_item counts from lines.
+
+Now code writing.
+
+Syllable counting:
+```python
+def _syllables(word):
+    w = word.lower()
+    groups = re.findall(r"[aeiouy]+", w)
+    n = len(groups)
+    if w.endswith("e") and n > 1 and not w.endswith(("le","ee","ye")):
+        n -= 1
+    return max(1, n)
+```
+Fine.
+
+Latinate regex as before.
+
+Stopwords set ~100.
+
+Now write features.
+
+For `_p100(s, c)`, if s.n_words == 0 return 0.
+
+Let me now write the file.
+
+Also need robust handling of texts with None: `_coerce_texts` converts None entries to "".
+
+Final test function must run standalone and print message? The old prints "sibling_features invariants OK". I'll return True and print optional? The spec says provide test suite function; printing is fine. I'll not print in function; but then module __main__ can call. Add `if __name__ == "__main__": test_sibling_features_invariants(); print(...)`.
+
+Let me write.
+
+Careful: in test, perm length must match sample list. I'll build 9 texts and perm accordingly.
+
+Testing permutation equality uses atol 1e-9.
+
+Let's produce code.
+
+I'll write content now via write tool. Then run tests and adjust.
+
+Draft:
+
+```python
+_WORD_RE = re.compile(r"[^\W\d_]+(?:['\u2019][^\W\d_]+)*")
+```
+
+Note `[^\W\d_]` = letters. Good.
+
+Em dash spaced regex: `(?<=\s)\u2014(?=\s)`.
+
+Straight dq share = straight/(curly+straight), handle zero.
+
+Now feature list and code.
+
+For digit_char_share denominator: len(text) including spaces? Use max(len(text),1). GLM flash digit frequency request — number_token per 100w and digit char share.
+
+Add `digit_char_share`.
+
+Let me also add `uppercase_word_share` (capitalization fingerprint; non-lowercase sanitization). Good addition, rationale: title casing and acronym habits. Add as feature ~91. And `all_caps_word_share` for acronyms.
+
+Add `sentence_initial_capital_share`? skip.
+
+Add `newline_count_log`? skip.
+
+OK writing.
+
+Wrap-up: after writing, run tests, run a quick benchmark on train.csv if exists (data/ has?). Check data dir maybe contains train.csv? Let me not waste; but validating on real data would be good. Check quickly later.
+
+Now produce code. I must ensure no syntax errors. I'll write carefully.
+
+Feature functions referencing s attributes — must define all attributes in __init__.
+
+List of attributes:
+text, n_words, n_chars, n_letters, words, lower, types, tokens
+n_sent, sent_word_counts
+sentence_list
+n_para, para_word_counts
+lines, line_word_counts
+counts: em_total, em_spaced, em_unspaced, en, dbl_hyphen, hyphenated, semi, colon, paren_o, paren_c, ellipsis, dq_straight, dq_curly, sq_straight, sq_curly, apos_straight, apos_curly, qmark, excl, comma, periods, digits, numbers, punct
+lexical: ttr, root_ttr, yule_k, simpson, hapax_share, mean_word_len, std_word_len, chars_per_word, long_word, short_word, poly, latinate, abstract, stop
+persona: fps, fpp, second, third, contractions
+markers via regex counts: hedge, booster, reasoning, grounded, contrastive, additive, causal, definitional, technical, math, dialogue_tag, narrative, action, sensory, color, sound, texture, light, temperature
+structural: header_count, header_present, bold, code, list_items, list_lines, table_lines
+
+For line-based stats computed in __init__.
+
+Let me define regexes module-level compiled.
+
+Feature functions are one-liners mostly.
+
+Time to write.
+
+Potential overlap issue: `_p100` uses n_words.
+
+For uppercase_word_share: sum(1 for w in words if w[0].isupper())/n_words (words include original case from `_WORD_RE.findall(self.text)`).
+
+all_caps_word_share: len>1 and w.isupper().
+
+Now write.
+
+I'll write ~90 features. Let me enumerate final names to keep pair map consistent:
+
+Typography:
+em_dash_total_per_100w
+em_dash_spaced_per_100w
+em_dash_spaced_share
+em_dash_unspaced_per_100w
+em_dash_style_entropy  (binary entropy of spacing)
+em_dash_per_sentence
+en_dash_per_100w
+double_hyphen_per_100w
+hyphenated_word_per_100w
+semicolon_per_100w
+colon_per_100w
+paren_open_per_100w
+paren_pair_per_sentence
+ellipsis_per_100w
+curly_dq_share
+straight_dq_share
+curly_sq_share
+curly_apostrophe_share
+dq_style_entropy
+question_mark_per_sentence
+question_sentence_share
+exclamation_per_100w
+comma_per_100w
+digit_char_share
+number_token_per_100w
+punct_per_100w
+uppercase_word_share
+all_caps_word_share
+
+Structure:
+log_word_count
+mean_sentence_words
+std_sentence_words
+cv_sentence_words
+median_sentence_words
+short_sentence_share
+long_sentence_share
+sentence_count_log
+paragraph_count_log
+mean_paragraph_words
+std_paragraph_words
+single_sentence_paragraph_share
+sentences_per_paragraph
+list_item_per_100w
+list_line_share
+markdown_header_per_100w
+markdown_header_present
+bold_span_per_100w
+code_span_per_100w
+mean_line_words
+short_line_share
+
+Lexical:
+ttr
+root_ttr
+yule_k_log
+simpson_d
+hapax_share
+mean_word_length
+std_word_length
+chars_per_word
+long_word_share
+short_word_share
+polysyllable_share
+latinate_share
+abstract_noun_share
+stopword_share
+contraction_per_100w
+
+Persona/discourse:
+first_person_singular_per_100w
+first_person_plural_per_100w
+second_person_per_100w
+third_person_per_100w
+hedge_per_100w
+booster_per_100w
+reasoning_marker_per_100w
+grounded_marker_per_100w
+contrastive_connective_per_100w
+additive_connective_per_100w
+causal_connective_per_100w
+connective_per_100w
+definitional_per_100w
+technical_term_per_100w
+math_symbol_per_100w
+
+Narrative:
+dialogue_tag_per_100w
+dialogue_sentence_share
+narrative_marker_per_100w
+action_verb_per_100w
+sensory_descriptor_per_100w
+color_term_per_100w
+sound_term_per_100w
+texture_term_per_100w
+light_term_per_100w
+temperature_term_per_100w
+narrative_pacing_index
+
+Token-boundary:
+clitic_share
+spaces_per_word
+char_per_sentence? already
+
+Count: 28 + 21 + 15 + 15 + 11 + 2 = 92.
+
+Add `word_boundary_punct_share`? skip.
+
+OK.
+
+Write code now. Must be careful with docstring quotes inside decorator strings (use double quotes and no internal double quotes, or use single).
+
+Let me compose.
+I found an existing, more elaborate version of this module in the workspace. I'll preserve it, then author a compact, fully self-contained implementation of my own and verify it against the stated invariants.
+Thinking: Now write the new module. Let me carefully compose it.
+
+I'll write it in full.
+Thinking: Now test. Potential issues:
+
+- `list_line_share` test: lines = ["- alpha","- beta","- gamma","A short closing line."] → 3/4 = 0.75. Good.
+- "Why? How? When? Where?" sentence split: _SENT_RE finds "Why?" etc → 4 sentences, all end with ? -> 1.0.
+- tight em dash: "The plan—flawed—worked." total 2, spaced 0 → unspaced per 100w >0. Good.
+- digit test: "In 2024 the model scored 0.87 on 18 classes." digit_char_share > 0 yes.
+- pacing: first text sentences "He ran." 2 words etc. narrative markers: Then, Later, Suddenly → 3. sent_short: sentences lens 2,3,4,2? "Later, he turned back." 4, "Suddenly, rain." 2 → 4 short. index = 4/4*(1+ 3/5*100/ n_words... wait _p100 with n_words = 2+3+4+2=11 → 27.27 per100, /5=5.45 → 6.45. second text 0 short? sentence is 20+ words, long; narrative markers 0 → 0. Good.
+
+- `_split_sentences` for "...!!??" → part "...!!??" has no word → filtered, so n_sent=0. Then question_share 0.
+- test "bounded" includes hapax_share — for empty doc =0; fine ≤1.
+- `em_dash_style_entropy` for dash_raw[0]: 2 spaced, 0 unspaced → p=1 → entropy 0. Good.
+- quantile clip test: method quantile ignores clip, fine.
+
+- permutation: robust scaling deterministic and equivariant. np.percentile same. OK.
+
+Potential issue: `_normalize_pair` with pair containing non-str objects → str() fine.
+
+Import-time check `len(PAIR_FEATURE_NAMES) != len(SIBLING_PAIRS)` = 10 == 10.
+
+Check duplicate routes? No test.
+
+One risk: FEATURE_DOCS values >40 chars — all yes.
+
+Run.
+Thinking: 93 features (I counted 92 but fine). Tests pass.
+
+Now validate on real data if available, and benchmark. Check data dir.
+Thinking: Run on train.csv: check feature variance, NaNs, and quick signal (e.g., LightGBM not available? sklearn maybe). Use sklearn LogisticRegression on a subset? Quick sanity: fit multinomial logistic on standardized features with grouped CV maybe heavy but 2699 rows fine. Just do a quick train/test split by prompt? We can compute a rough balanced accuracy with LogisticRegression and 5-fold GroupKFold to confirm features aren't garbage. Use sklearn if installed.
+
+Also check timing for 2699 docs.
+
+Also check specific pair separation: e.g., glm-5.3 vs flash balanced accuracy on routed features. That's valuable verification.
+
+Let me run.
+Thinking: Need y as numpy array of str and pass groups properly using StratifiedGroupKFold split. Also 4.5s for 2700 docs is okay but a bit slow (4000 test ~7s). Fine.
+
+12 zero-variance columns on train (e.g., tables/code maybe). That's expected but means constant columns; robust scaling returns 0. Fine.
+
+Let me rerun pair eval with StratifiedGroupKFold.
+Thinking: These are realistic pair-level numbers: hard pairs ~0.50-0.56, easy ones 0.7-0.79. That's plausible for stylometry-only features and confirms signal (chance 0.5). Good.
+
+The earlier test used cross_val_predict with groups and cv int → warning; this proper version works.
+
+Check zero-variance columns list; constant features like markdown_header maybe not constant. Let's see which 12 are constant — might indicate dead features (e.g., table_line_share removed; code/bold maybe). It's fine, but could remove truly dead features. Let me inspect. Also check runtime: 4.5s for 2700 = acceptable (4000 ~ 7s), well within Kaggle budget.
+
+Check constant list quickly.
+Thinking: 11 constant columns on train. Reasons:
+- em_dash_style_entropy: with at most 1 em dash per doc, always pure → 0. Expected; still useful on test maybe. Actually entropy needs >=2 dashes; passages short. It's nearly dead. Keep? It's in pair 1 routing; a constant column wastes a slot. The pair-1 BA was 0.773, strong. Maybe replace entropy with something more informative? Hmm.
+- double_hyphen: zero in train (competition data strips markdown? maybe). Keep low cost.
+- dq_style_entropy: at most one quote style per doc → 0. Dead. Could drop or keep; pair 5 includes it, yet BA 0.507 (close to chance anyway). Maybe replace with better features for that pair.
+- std_paragraph_words: most passages single paragraph → 0. Dead-ish.
+- list/header/bold/code: markdown stripped in competition train (AGENTS says "only superficial bold/markdown wrapping stripped") → all zero. So markdown features are dead on this data! Pair 6 routed header features useless, yet BA 0.700 driven by technical terms etc.
+
+Given the competition strips markdown, structural markdown features are dead weight. But the task explicitly asks for markdown header usage as a discriminator for pair 6. Keep them (harmless, and test set may retain some), but maybe reorder routes so dead ones aren't first? For pair 6, header is first two; a specialised head using prefix k=2 would be useless. Better to put technical terms first and headers later, while still including them. But the prompt explicitly lists markdown header usage for that pair; presence can stay in route but lower priority.
+
+Similarly for pair 4, gemini compactness/list features: list dead but paragraph stats work (BA 0.503, near chance). Hmm, those two Gemini flashes may genuinely be near-identical on stylometry.
+
+Let me reconsider double_hyphen: train has zero, so dead. Fine.
+
+`dq_style_entropy` dead because docs contain at most one quote style. Could compute entropy across doc? no. Maybe replace with something useful: `quote_mark_per_100w` (quote density) which varies. For pair 5, curly share + question frequency matter. Keep entropy? It's a documented feature but adds noise column. I could redefine dq_style_entropy as entropy over (curly open, curly close, straight) distribution — still likely 0 if one type. Alternatively drop it and add `quote_density_per_100w` which is informative for dialogue-heavy 3.8. Let me replace `dq_style_entropy` with `quote_density_per_100w`? But the docstring says entropy; requirement doesn't demand it. Better: keep entropy (harmless) and also add quote density? Feature count grows; no harm.
+
+Actually simpler and better: modify `dq_style_entropy` to measure mixture across the whole doc using counts normalization; still 0 for single style. Real docs often have several quote pairs but all same style → 0. So it's structurally dead. Replace it with `quote_pair_per_sentence` (density). Hmm but "curly quote variance" was requested for 3.8 vs 3.7; curly share covers it.
+
+I'll replace `dq_style_entropy` with `quote_mark_per_100w` and update pair 5 route. But then the test asserting entropy? I only assert em_dash entropy. Fine.
+
+Similarly `em_dash_style_entropy` dead because short passages have 1 dash. Replace? Pair 1 already strong. Could keep for long docs. I'd rather replace with `em_dash_clause_position`? Overkill. Keep as is — it's defensible and only 1 of 93.
+
+But dead columns also affect robust scaling? No, they become 0.
+
+More important: pair-level performance is decent for a stylometry-only baseline. Could I improve pair 2 (0.603) and pair 3 (0.542)? These are known hard. Fine.
+
+Runtime 4.5s for 2700 docs — acceptable but could optimize `question_sentence_share` and `dialogue_sentence_share` which re-split sentences (2 extra splits/doc). Cache sentences in stats instead: store `sentences` list. That improves speed and avoids duplicate work. Let me add "sentences" to slots and use it.
+
+Also `_split_sentences` called in `__init__` for single-sentence paragraph share per block — that's per paragraph, fine.
+
+Optimization: store `self.sentences = sentences`, then question/dialogue use it.
+
+Also in `sent_single_para` compute per block.
+
+Let me patch:
+- add "sentences" to __slots__
+- set self.sentences = sentences
+- question_sentence_share uses s.sentences
+- dialogue_sentence_share uses s.sentences
+- test unchanged.
+
+Also replace dq_style_entropy with quote_mark_per_100w? Let me think about whether to keep API richness. The task mentions "curly quote variance (3.8 has 75% curly dq vs 1% in 3.7)" — curly_dq_share covers. A second dead entropy column adds nothing. I'll replace with `quote_mark_per_100w` — quote density (a real dialogue/format signal), keeping 93 features.
+
+Wait, but pair 9 route includes dq_style_entropy. Update to quote_mark_per_100w.
+
+Let me make these edits, then re-run tests and pair checks for affected pairs.
+
+Also reconsider `double_hyphen_per_100w` dead in train; keep (test/train may include markdown-ish text? Train stripped only "superficial bold/markdown wrapping" — headers/lists were probably stripped, so zero).
+
+Another improvement: `std_paragraph_words` dead. Could replace with `paragraph_word_range` (max-min) — also 0 for one paragraph. Keep.
+
+For pair 4, mean_paragraph_words constant (single paragraph → equals doc length) — actually correlates with word count, so weak. BA 0.503 means gemini 3.6 vs 3.7 nearly indistinguishable by these features. Could add stronger features: punctuation per sentence, comma rate, em dash? Gemini has ~0 em dashes. Maybe sentence-length distribution percentiles, "you" usage, bullet usage (dead). Let's add features that differ: `mean_sentence_words` already in other pairs but not in pair 4 route; add it. Pair 4 route currently paragraph stats + list + connectives + lines. Since paragraphs are one block, mean_paragraph_words ≈ length. Maybe add `comma_per_sentence`, `semicolon_per_100w`, `question_mark_per_sentence`, `exclamation`.
+
+I can tune route 4 to: mean_sentence_words, median_sentence_words, std_sentence_words, comma_per_100w, connective_per_100w, list_item_per_100w, mean_paragraph_words, short_sentence_share, log_word_count, question_mark_per_sentence. But the prompt explicitly names "paragraph structural compactness, list item frequency, connective markers" — keep those first three, add sentence stats.
+
+Let me quickly test alternative routes empirically to pick better ones? That's optimization on train CV (fine, low risk). I can run a quick greedy check for pair 4 and pair 5 using all 93 features and inspect top coefficients, then adjust route.
+
+Time budget: pair CV takes seconds. Let's do a quick logistic fit on pair subset with all features and rank by |coef| to inform routes. That risks overfitting but routes are just hints.
+
+Let me do that for pairs 4, 5, 8, 10 (weak ones).
+Thinking: Useful. I'll enrich routes with empirically strong features while keeping the mission's thematic features:
+
+Pair 4 (gemini 3.6/3.7): chars_per_sentence, punct_per_100w, yule_k_log, dialogue_sentence_share, comma_per_100w, mean_sentence_words, list_item_per_100w, connective_per_100w, mean_paragraph_words, log_word_count. Keeps required paragraph/list/connective.
+
+Pair 5 (3.7/3.8): curly_dq_share, straight_dq_share, stopword_share, simpson_d, comma_per_100w, semicolon_per_100w, mean_sentence_words, cv_sentence_words, question_mark_per_sentence, curly_apostrophe_share. Keeps curly quote + question.
+
+Pair 8 (sol/terra): sentences_per_paragraph, root_ttr, log_word_count, long_word_share, mean_word_length, reasoning_marker, grounded_marker, definitional, number_token, std_sentence_words. Keeps core discourse markers.
+
+Pair 10 (glm): yule_k_log, mean_sentence_words, punct_per_100w, chars_per_word, semicolon, number_token, digit_char_share, median_sentence_words, mean_word_length, exclamation, short_sentence_share. Keeps required compression/chars-per-word/digit.
+
+These coefficient rankings are in-sample; but reasonable. Note chars_per_sentence ranks high for pair4 — add to route (exists).
+
+Also note `dialogue_sentence_share` uses quote marks; fine.
+
+Now patch routes, replace dq_style_entropy with quote_mark_per_100w, cache sentences, maybe improve pair 2/3 routes? They're hard; ranking could help but not necessary. Let's also inspect pair 2/3 quickly? Could, but time. Pair 2 0.603, pair 3 0.542. Adding empirically strong features could push. Let me check coefficients for those too, then finalize routes once.
+Thinking: I'll enrich routes 2, 3, 7 as well, keeping keyword-required features near front.
+
+Pair 2: keep ttr, root_ttr, yule_k_log, simpson_d, hapax_share, std_sentence_words, cv_sentence_words, latinate_share, polysyllable_share, mean_word_length + add short_sentence_share, stopword_share, mean_sentence_words, paren_open_per_100w. That's 14; okay.
+
+Pair 3: keep narrative_pacing_index, dialogue_tag, dialogue_sentence_share, narrative_marker, action_verb, sensory_descriptor, color, sound, texture, light, first_person_singular, short_sentence_share + add number_token? That seems weird for fable (LLM may include numbers); digit_char_share, paren_pair, cv_sentence_words, short_word_share, temperature. Route to 15 maybe. Keep thematic first 11, add cv_sentence_words, paren_pair_per_sentence, temperature_term, short_word_share.
+
+Pair 7: em_dash_total, em_dash_per_sentence, em_dash_spaced_share, yule_k_log, latinate, polysyllable, booster, hedge, mean_word_length, reasoning + add number_token, semicolon, std_sentence_words, short_word_share.
+
+Also pair 1: strong 0.773; keep.
+
+Pair 6: 0.700; maybe reorder to put technical first? Current first two header features are constant → if a head uses first 2 columns it's dead. But heads likely use all. Still, put technical_term first, then sentence stats, polysyllable, latinate, definitional, header, bold, list, math. Contains all requested.
+
+Pair 9: 0.787; keep but maybe drop dq_style_entropy replaced by quote density.
+
+Now implement edits:
+1. Replace `_dq_style_entropy` feature with `quote_mark_per_100w`.
+2. Cache sentences.
+3. Update routes.
+
+Careful: the test checks FEATURE_DOCS etc. No reference to dq_style_entropy in tests. Pair route must update.
+
+Let me apply edits.
+Thinking: Now update the pair routes. Replace the whole `_PAIR_FEATURE_NAMES_RAW` block.
+Thinking: Oops: in pair 1 route I duplicated "colon_per_100w" (appears at position 8 and 12). Duplicate names → get_pair_feature_indices duplicates, and test asserts unique indices. Need to fix: replace last "colon_per_100w" with something else, e.g., "mean_sentence_words" or "paren_pair_per_sentence" already there. Use "median_sentence_words". Let me fix.
+Thinking: Now add a route integrity check at import for duplicates? Good idea:
+
+```python
+for _pair_key, _pair_names in PAIR_FEATURE_NAMES.items():
+    _missing...
+    if len(set(_pair_names)) != len(_pair_names): raise RuntimeError(...)
+```
+
+But import-time raise on bug is fine. Add.
+
+Also update docstring example count (N, 92) → (N, 93). And test could assert each route has >=5 entries etc.
+
+Run tests.
+Thinking: Now re-run pair-level CV to confirm routes improved (and aren't worse due to in-sample selection). Use proper StratifiedGroupKFold. Compare against prior numbers.
+Thinking: Improvements across most pairs:
+- pair2 0.603→0.657
+- pair3 0.542→0.559
+- pair4 0.503→0.583
+- pair5 0.507→0.553
+- pair6 0.700→0.750
+- pair7 0.560→0.637
+- pair8 0.537→0.590
+- pair9 0.787→0.797
+- pair10 0.533→0.547
+- pair1 0.773→0.750 (slightly down due to adding features; maybe drop the last two extras to restore). Let me check pair1 with only first 10 (the original). Could revert extras. The drop might be noise, but original was better. Test quickly: pair1 using idx[:10] vs full.
+Thinking: First 10 best (0.773). Revert pair1 extras to the original 10 to keep best. The task's thematic features (spaced dashes, semicolon, parens) are all in first 8, fine.
+
+Do that edit. Then final test run + maybe full 18-class CV check with these features alone (optional). A quick 18-class grouped CV using all features would show overall contribution (~0.30-0.35). Let's test to report.
+
+Also check feature extraction determinism and runtime 4s.
+
+Let me revert pair1 and run 18-class CV.
+Thinking: 18-class stylometry-only: 0.308 grouped CV. Reasonable (baseline TF-IDF logistic is 0.343; stylometry alone 0.31 is a solid complementary view).
+
+Now final review of the file for quality issues:
+- Duplicate import `Sequence` used? Yes in _mean signatures.
+- `_split_sentences` filters segments with no words: "...!!??" → empty.
+- `_REL` etc fine.
+- Potential issue: `FEATURE_DOCS` docs length check passed.
+- `_coerce_texts` with numpy 2D? tolist gives nested lists → str(list) weird. Could guard: if ndim > 1 raise. Add robustness? Minor.
+- Text containing only digits ("2024") → no sentences (because _SENT_RE works but no words) → n_sent=0, sent features 0. Acceptable.
+- Question test "Why? How?..." passed.
+
+Check file line count and run pyflakes-ish compile. Also confirm no unused vars causing issues (not important).
+
+One more: `_TextStats` slots list includes "sentences" now; ensure set. Yes.
+
+Test edge: text with `\x01` char? irrelevant.
+
+Check `spaces_per_word` for empty → 0.
+
+Check `_quantile_scale` ties: ranks computed as average via sums/counts — correct? ranks[inverse] = arange, then sums[uniq] adds all ranks for that value; dividing by count gives mean rank. Yes.
+
+One subtlety: `np.unique` sorts; `return_inverse` maps each element to index in uniq; ranks[inverse] = 0..n-1 then averaged. Correct.
+
+Check robust z with N=2: IQR could be 0 → std fallback; if both values differ, std>0 → fine. If identical → 0.
+
+Test `clip` param: robust clip negative? no guard; minor.
+
+Now, the final output must be ONLY the Python code in a python code block. The module is ~1150 lines? Let me check size. Actually wrote big; count.
+Thinking: 1955 lines, 70KB — nearly as large as the previous 2154-line file. Hmm, output size concern again. The file ended up long because of docstrings/formatting. Output ~18k tokens.
+
+The orchestrator timeout 180s. Generation of 1955 lines may take >180s on this model (probably ~30-60 tok/s → 18k tokens ≈ 300-600s). Risk of timeout and total loss.
+
+I need to reduce output. Options:
+- Output a condensed version? But then it differs from tested file.
+- The harness runs me as a subagent; timeout may or may not kill. Actually my tool calls already took a while; the timeout in run_agent is 180s total. We've likely already exceeded? My elapsed time includes many tool calls. If subprocess is killed at 180s, I wouldn't be running now... unless the orchestrator isn't actually running with that timeout or a different runner is used. The file subagent1_raw.txt captured my earlier thinking at 9035 bytes — suggesting live capture, maybe a different orchestrator with longer timeout (the raw file quotes my thinking verbatim). Since I'm still alive, timeout likely higher or not enforced.
+
+Check subagent1_raw.txt size now — if it's growing with my current output, the runner is capturing.

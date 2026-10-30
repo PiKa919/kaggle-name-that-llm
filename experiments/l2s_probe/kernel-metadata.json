@@ -1,0 +1,21 @@
+{
+  "id": "pikaaa/ntl-l2s-probe",
+  "title": "NTL l2s3 probe",
+  "code_file": "script.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": "true",
+  "enable_gpu": "true",
+  "enable_tpu": "false",
+  "enable_internet": "false",
+  "dataset_sources": [
+    "ahmedberatozer/ntl-l2s3-q8"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [
+    "name-that-llm"
+  ],
+  "model_sources": [
+    "qwen-lm/qwen-3/Transformers/8b-base/1"
+  ]
+}
